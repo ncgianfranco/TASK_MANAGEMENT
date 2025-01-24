@@ -26,6 +26,11 @@ class Request {
         return $_GET[$key] ?? $default;
     }
 
+    // Get a specific POST parameter
+    public function input(string $key, $default = null){
+        return $_POST[$key] ?? $default;
+    }
+
     public function all(){
         return array_merge($this->query(), $this->post());
     }

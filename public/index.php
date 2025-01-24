@@ -1,15 +1,19 @@
 <?php
-
-require_once __DIR__.'/../vendor/autoload.php';
+// public/index.php
+require __DIR__ . '/../vendor/autoload.php';
 
 use App\app\core\Router;
 
-// Create new router
 $router = new Router();
 
-// Define routes
-$router->addRoute('GET', '/', 'HomeController@index');
-$router->addRoute('GET', '/about', 'HomeController@about');
+// Authentication routes
+$router->addRoute('GET', '/register', 'AuthController@registerForm');
+$router->addRoute('POST', '/register', 'AuthController@register');
+$router->addRoute('GET', '/login', 'AuthController@loginForm');
+$router->addRoute('POST', '/login', 'AuthController@login');
+$router->addRoute('GET', '/logout', 'AuthController@logout');
+
+// Task routes (protected)
 $router->addRoute('GET', '/tasks', 'TaskController@index');
 $router->addRoute('GET', '/tasks/create', 'TaskController@create');
 $router->addRoute('POST', '/tasks', 'TaskController@store');
@@ -18,5 +22,4 @@ $router->addRoute('POST', '/tasks/{id}', 'TaskController@update');
 $router->addRoute('POST', '/tasks/{id}/delete', 'TaskController@delete');
 
 // Dispatch the request
-
 $router->dispatch();
