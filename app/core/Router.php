@@ -21,10 +21,6 @@ class Router {
         $request = new Request();
         $response = new Response();
 
-        echo '<pre>';
-        echo var_dump($request->path());
-        echo '</pre>';
-
         foreach ($this->routes[$request->method()] as $route => $handler) {
             // Convert route to regex to handle dynamic segments
             $pattern = preg_replace('/\{(\w+)\}/', '(?P<$1>\w+)', $route);

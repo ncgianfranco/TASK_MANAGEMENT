@@ -5,7 +5,7 @@ namespace App\app\core;
 class Response {
     private int $statusCode = 200;
     private array $headers = [];
-    private string $body;
+    private string $body = '';
 
     // Set the HTTP status code
     public function status(int $code){
@@ -36,6 +36,9 @@ class Response {
 
     // Redirec to a different URL
     public function redirect(string $url){
-        $this->status(302)->header('Location', $url)->send();
+        echo '<pre>';
+        echo var_dump($url);
+        echo '</pre>';
+        header("Location: $url", true, 301);
     }
 }

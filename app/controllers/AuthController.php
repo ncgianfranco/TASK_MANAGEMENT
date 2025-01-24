@@ -3,11 +3,16 @@
 namespace App\app\controllers;
 use App\app\core\Controller;
 use App\app\models\User;
+use App\app\core\Request;
+use App\app\core\Response;
 
 class AuthController extends Controller {
     private User $user;
 
-    public function __construct(){
+    public function __construct(Request $request, Response $response){
+        parent::__construct($request, $response);
+
+        // initialize the user model
         $this->user = new User();
     }
 
@@ -60,7 +65,7 @@ class AuthController extends Controller {
                 // start a session and store user data
                 session_start();
                 $_SESSION['user'] = $user;
-                $this->redirect('/task');
+                $this->redirect('/tasks');
             } else {
                 $this->show("Invalid emial or password");
             }
