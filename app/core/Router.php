@@ -8,11 +8,12 @@ use App\app\core\Response;
 
 class Router {
     private array $routes = [];
+    private array $middleware = [];
 
     // Add a route to the router
-    public function addRoute(string $method, string $path, $handler)
-    {
+    public function addRoute(string $method, string $path, $handler, $middleware = []){
         $this->routes[$method][$path] = $handler;
+        $this->middleware[$method][$path] = $middleware;
     }
 
     // Dispatch the request to the appropriate handler
@@ -29,6 +30,21 @@ class Router {
             if (preg_match($pattern, $request->path(), $matches)) {
                 // Extract dynamic segments
                 $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
+
+                // Apply middleware
+                if (!empty($this->middleware[$request->method()][$route])) {
+                    foreach ($this->middleware[$request->method()][$route] as $middleware) {
+                        echo '<pre>';
+                        echo var_dump($middleware);
+                        echo '</pre>';
+                        $middlewareClass = $middleware;
+                        if (class_exists($middlewareClass)) {
+                            (new $middlewareClass)->handle();
+                        } else {
+                            throw new Exception("Middleware $middlewareClass not found");
+                        }
+                    }
+                }
 
                 if (is_callable($handler)) {
                     call_user_func($handler, ...array_values($params));

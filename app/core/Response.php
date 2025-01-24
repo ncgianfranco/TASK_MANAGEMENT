@@ -36,9 +36,6 @@ class Response {
 
     // Redirec to a different URL
     public function redirect(string $url){
-        echo '<pre>';
-        echo var_dump($url);
-        echo '</pre>';
         header("Location: $url", true, 301);
     }
 }
