@@ -21,6 +21,7 @@ $router->addRoute('POST', '/tasks', 'TaskController@store', [AuthMiddleware::cla
 $router->addRoute('GET', '/tasks/{id}/edit', 'TaskController@edit', [AuthMiddleware::class]);
 $router->addRoute('POST', '/tasks/{id}', 'TaskController@update', [AuthMiddleware::class]);
 $router->addRoute('POST', '/tasks/{id}/delete', 'TaskController@delete', [AuthMiddleware::class]);
+$router->addRoute('POST', '/tasks/{id}/complete', 'TaskController@complete', [AuthMiddleware::class]);
 
 // Dispatch the request
 $router->dispatch();

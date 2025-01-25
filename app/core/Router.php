@@ -34,9 +34,6 @@ class Router {
                 // Apply middleware
                 if (!empty($this->middleware[$request->method()][$route])) {
                     foreach ($this->middleware[$request->method()][$route] as $middleware) {
-                        echo '<pre>';
-                        echo var_dump($middleware);
-                        echo '</pre>';
                         $middlewareClass = $middleware;
                         if (class_exists($middlewareClass)) {
                             (new $middlewareClass)->handle();
