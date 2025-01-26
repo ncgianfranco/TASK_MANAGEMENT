@@ -1,7 +1,7 @@
 <?php
 // public/index.php
 require __DIR__ . '/../vendor/autoload.php';
-
+require __DIR__.'/../app/api/api.php';
 use App\app\core\Router;
 use App\app\middleware\AuthMiddleware;
 

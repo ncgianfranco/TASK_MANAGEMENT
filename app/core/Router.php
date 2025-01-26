@@ -14,6 +14,7 @@ class Router {
     public function addRoute(string $method, string $path, $handler, $middleware = []){
         $this->routes[$method][$path] = $handler;
         $this->middleware[$method][$path] = $middleware;
+        //echo "<pre>Added Route: Method=$method, Path=$path, Handler=$handler</pre>";
     }
 
     // Get routes
