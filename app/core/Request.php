@@ -34,4 +34,9 @@ class Request {
     public function all(){
         return array_merge($this->query(), $this->post());
     }
+
+    // Get the raw request body
+    public function body(){
+        return file_get_contents('php://input');
+    }
 }
