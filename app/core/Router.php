@@ -16,6 +16,11 @@ class Router {
         $this->middleware[$method][$path] = $middleware;
     }
 
+    // Get routes
+    public function getRoutes(): array{
+        return $this->routes;
+    }
+
     // Dispatch the request to the appropriate handler
     public function dispatch() {
 
